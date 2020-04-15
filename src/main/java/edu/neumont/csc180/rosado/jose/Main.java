@@ -26,6 +26,14 @@ public class Main {
 		
 		JSONReader reader = new JSONReader(filePath);
 		
+		Account testAccount = reader.accounts.get(0);
+		
+		HTMLGenerator htmlBuilder = new HTMLGenerator(testAccount);
+		htmlBuilder.createHTMLFile(testAccount);
+		
+		
+		
+		
 //		try (OutputStream os = new FileOutputStream("out.pdf")) {
 //            PdfRendererBuilder builder = new PdfRendererBuilder();
 //            builder.useFastMode();
