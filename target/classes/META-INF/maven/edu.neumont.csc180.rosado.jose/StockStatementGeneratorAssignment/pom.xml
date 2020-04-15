@@ -3,4 +3,60 @@
   <groupId>edu.neumont.csc180.rosado.jose</groupId>
   <artifactId>StockStatementGeneratorAssignment</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+      <maven.compiler.source>14</maven.compiler.source>
+      <maven.compiler.target>14</maven.compiler.target>
+	  <!-- Define the version of OPEN HTML TO PDF in the properties section of your POM. -->  	       
+ 	  <openhtml.version>1.0.2</openhtml.version>
+   </properties>
+   
+  <dependencies>
+  
+  	<dependency>
+  		<!-- ALWAYS required. -->
+  		<groupId>com.openhtmltopdf</groupId>
+  		<artifactId>openhtmltopdf-core</artifactId>
+  		<version>${openhtml.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<!-- Required for PDF output. -->
+  		<groupId>com.openhtmltopdf</groupId>
+  		<artifactId>openhtmltopdf-pdfbox</artifactId>
+  		<version>${openhtml.version}</version>
+  	</dependency>
+  	
+  	<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+	<dependency>
+	    <groupId>com.googlecode.json-simple</groupId>
+	    <artifactId>json-simple</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
+	  	
+  
+  	<dependency>
+	  	<groupId>org.junit.jupiter</groupId>
+	  	<artifactId>junit-jupiter-api</artifactId>
+	  	<version>5.6.0</version>
+	  	<scope>CalculatorTest2</scope>
+	</dependency>
+  
+  </dependencies>
+
+  <build>
+	  <plugins>
+
+	  	<plugin>
+	  		<groupId>org.apache.maven.plugins</groupId>
+	  		<artifactId>maven-compiler-plugin</artifactId>
+	  		<version>3.8.1</version>
+	  		<configuration>
+	  			<source>14</source>
+	  			<target>14</target>
+	  		</configuration>
+	  	</plugin>
+
+	  </plugins>
+  </build>
 </project>
