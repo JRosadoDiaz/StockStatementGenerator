@@ -25,12 +25,14 @@ public class JSONReader {
 		JSONParser parser = new JSONParser();
 		
 		try(Reader reader = new FileReader(filePath)) {
+			// The accounts are stored in one big JSONArray that needs to be iterated through
 			JSONArray trades = (JSONArray) parser.parse(reader);
 			for(Object obj : trades) {
 				JSONObject jsonObject = (JSONObject) obj;
 
 				Account acc = new Account();
 				
+				// Take a single account and begin storing its attributes
 				acc.setAccountNumber((Long) jsonObject.get("account_number"));
 				acc.setSsn((String) jsonObject.get("ssn"));
 				acc.setFirstName((String) jsonObject.get("first_name"));
@@ -39,6 +41,8 @@ public class JSONReader {
 				acc.setPhone((String) jsonObject.get("phone"));
 				acc.setBeginningBalance((String) jsonObject.get("beginning_balance"));
 				
+				// Stock trades are within another JSONArray
+				// Create a new entry for each trade to add to Account list
 				JSONArray stockTrades = (JSONArray) jsonObject.get("stock_trades");
 				for(Object trade : stockTrades) {
 					//Parse trade into a StockTrade object
@@ -53,14 +57,13 @@ public class JSONReader {
 					acc.getStockTrades().add(newTrade);
 				}
 				
+				// Add newly created object into list
 				accounts.add(acc);
 			}
-		
 		} catch(IOException e) {
 			e.printStackTrace();
 		} catch (org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
 		}
-		
 	}
 }

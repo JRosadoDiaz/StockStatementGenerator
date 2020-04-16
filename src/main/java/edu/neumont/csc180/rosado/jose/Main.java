@@ -22,25 +22,25 @@ public class Main {
 	static String filePath = "C:\\Users\\Jose Rosado\\eclipse-workspace\\StockStatementGeneratorAssignment\\src\\main\\java\\edu\\neumont\\csc180\\rosado\\jose\\stock_transations.by.account.holder.json\\";
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
+		// Reads JSON file and stores accounts into a list
 		JSONReader reader = new JSONReader(filePath);
 		
-		Account testAccount = reader.accounts.get(0);
+		// Test Account
+//		Account testAccount = reader.accounts.get(0);
+		 
+//		HTMLGenerator htmlBuilder = new HTMLGenerator(testAccount);
+//		htmlBuilder.createHTMLFile(testAccount);
 		
-		HTMLGenerator htmlBuilder = new HTMLGenerator(testAccount);
-		htmlBuilder.createHTMLFile(testAccount);
+		for(Account acc : reader.accounts) {
+			// Build xhtml files for all accounts in list
+			HTMLGenerator.createHTMLFile(acc);
+			
+			// Then create a PDF file from xhtml file
+			PDFGenerator.createPDFFile(acc, HTMLGenerator.getURIFormat(acc).toString());
+		}
 		
-		
-		
-		
-//		try (OutputStream os = new FileOutputStream("out.pdf")) {
-//            PdfRendererBuilder builder = new PdfRendererBuilder();
-//            builder.useFastMode();
-//            builder.withUri("file:///Users/me/Documents/pdf/in.htm");
-//            builder.toStream(os);
-//            builder.run();
-//		}
+		System.out.println("All PDF Files created");
 	}
 
 }

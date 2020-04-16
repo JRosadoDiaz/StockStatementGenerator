@@ -34,12 +34,28 @@ public class StockStatementTests {
 	public void html_file_is_created() {
 		//arrange
 		Account testAccount = reader.accounts.get(0);
-		HTMLGenerator htmlBuilder = new HTMLGenerator(testAccount);
-		String filePath = "Margalo_Trobey.html";
+		String filePath = "HTML_Files/Margalo_Trobey.html";
 		
 		//act
-		htmlBuilder.createHTMLFile(testAccount);
+		HTMLGenerator.createHTMLFile(testAccount);
 		File f = new File(filePath);
+		
+		//assert
+		boolean exists = f.exists();
+		assertTrue(exists);
+	}
+	
+	@Test
+	public void pdf_file_is_created() {
+		//arrange
+		Account testAccount = reader.accounts.get(0);
+		String pdfFilePath = "PDF_Files/Margalo_Trobey.pdf";
+		
+		//act
+		HTMLGenerator.createHTMLFile(testAccount);
+		String htmlFilePath = HTMLGenerator.getURIFormat(testAccount).toString();
+		PDFGenerator.createPDFFile(testAccount, htmlFilePath);
+		File f = new File(pdfFilePath);
 		
 		//assert
 		boolean exists = f.exists();
